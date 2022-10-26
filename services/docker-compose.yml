@@ -1,0 +1,20 @@
+version: "3.8"
+#volumes:
+#  vol-emqx-data:
+#    name: foo-emqx-data
+#  vol-emqx-etc:
+#    name: foo-emqx-etc
+#  vol-emqx-log:
+#    name: foo-emqx-log
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo:4.4
+    restart: always
+    environment:
+      TZ: "America/Lima"
+    volumes:
+      - ./mongodata:/data/db
+    ports:
+      - 27017:27017
