@@ -11,7 +11,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine(
   '.hbs',
-  exphbs({
+  exphbs.engine({
     defaultLayout: 'main.hbs',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
@@ -26,15 +26,20 @@ app.use(
   session({
     secret: 'mysecretapp ',
     resave: true,
-    saveUninitialize: true,
+    saveUninitialized: true,
   })
 );
 
 // Global variables
 
 // Routes
+app.use(require('./routes/index'));
+app.use(require('./routes/notes'));
+app.use(require('./routes/users'));
 
 // Static files
 
 // Server settings
-app.listen(app.get('port'), () => {});
+app.listen(app.get('port'), () => {
+  console.log('Servidor escuchando en', app.get('port'));
+});
